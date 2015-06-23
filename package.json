@@ -14,9 +14,17 @@
     "appx"
   ],
   "author": "Alex Lu",
+  "bin": {
+    "cloudappx": "cloudappx.js"
+  },
   "bugs": {
     "url": "https://github.com/alxlu/CloudAppX-cli/issues"
   },
   "homepage": "https://github.com/alxlu/CloudAppX-cli#readme",
-  "preferGlobal": true
+  "preferGlobal": true,
+  "dependencies": {
+    "archiver": "^0.14.4",
+    "commander": "^2.8.1",
+    "request": "^2.58.0"
+  }
 }
