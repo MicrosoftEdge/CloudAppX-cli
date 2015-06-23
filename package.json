@@ -1,0 +1,22 @@
+{
+  "name": "cloudappx",
+  "version": "0.0.1",
+  "description": "Cloudy with a chance of AppX",
+  "main": "cloudappx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxlu/CloudAppX-cli.git"
+  },
+  "keywords": [
+    "appx"
+  ],
+  "author": "Alex Lu",
+  "bugs": {
+    "url": "https://github.com/alxlu/CloudAppX-cli/issues"
+  },
+  "homepage": "https://github.com/alxlu/CloudAppX-cli#readme",
+  "preferGlobal": true
+}
