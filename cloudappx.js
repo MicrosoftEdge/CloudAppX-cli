@@ -6,6 +6,8 @@ var fs = require('fs');
 var request = require('request');
 var path = require('path');
 
+var domain = 'https://8b57e1a5.ngrok.io';
+
 function isValidFile (dir) {
   if (!fs.existsSync(dir) || !fs.lstatSync(dir).isFile() || path.extname(dir) !== '.zip') {
     return false;
@@ -33,7 +35,7 @@ if (!program.args.length) {
   var dir = program.args[0];
   if (!program.zip) {
     if (isValidDir(dir)) {
-      var outfile = 'package.zip';
+      var outfile = dir + '.zip';
       var output = fs.createWriteStream(outfile);
       var archive = archiver('zip');
       output.on('close', function () {
@@ -59,13 +61,22 @@ if (!program.args.length) {
 }
 
 function uploadFile(file) {
-  var req = request.post('http://localhost:8080/v1/upload', function (err, resp, body) {
+  var req = request.post(domain + '/v1/upload', function (err, resp, body) {
     if (err) {
       console.log('Error!');
     } else {
       console.log('URL: ' + body);
+      getResult(body);
     }
   });
   var form = req.form();
   form.append('xml', fs.createReadStream(file));
+}
+
+function getResult(url) {
+  var req = request.get(domain + '/' + url)
+    .on('response', function(res) {
+      var filename = 'package.appx';
+      res.pipe(fs.createWriteStream('./' + filename));
+    });
 }
