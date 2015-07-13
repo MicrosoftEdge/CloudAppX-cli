@@ -96,11 +96,14 @@ function uploadFile(file) {
 function getResult(dirs) {
   var url = dirs.url;
   var file = dirs.file;
+  var tempsplit = file.split('.');
+  tempsplit.pop();
+  var filename = tempsplit.join('.') + '.appx';
   var deferred = Q.defer();
   var req = request.get(domain + '/' + url)
   .on('response', function(res) {
-    var filename = 'package.appx';
-    res.pipe(fs.createWriteStream(path.join(file, '../' + filename)));
+    //var filename = 'package.appx';
+    res.pipe(fs.createWriteStream(filename));
     deferred.resolve();
   });
   return deferred.promise;
