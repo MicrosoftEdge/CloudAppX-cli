@@ -79,7 +79,7 @@ function uploadFile(file) {
       console.log('Error!');
     } else {
       console.log('URL: ' + body);
-      deferred.resolve(body);
+      deferred.resolve({url: body, file: file});
     }
   });
   var form = req.form();
@@ -87,14 +87,16 @@ function uploadFile(file) {
   return deferred.promise;
 }
 
-function getResult(url) {
+function getResult(dirs) {
+  var url = dirs.url;
+  var file = dirs.file;
   var deferred = Q.defer();
   var req = request.get(domain + '/' + url)
-    .on('response', function(res) {
-      var filename = 'package.appx';
-      res.pipe(fs.createWriteStream('./' + filename));
-      deferred.resolve();
-    });
+  .on('response', function(res) {
+    var filename = 'package.appx';
+    res.pipe(fs.createWriteStream(path.join(file, '../' + filename)));
+    deferred.resolve();
+  });
   return deferred.promise;
 }
 
