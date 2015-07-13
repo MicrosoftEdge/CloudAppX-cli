@@ -39,7 +39,7 @@ function main() {
 }
 
 function cloudappx(dir) {
-  zip(dir).then(uploadFile).then(getResult);
+  return zip(dir).then(uploadFile).then(getResult);
 }
 
 function zip(dir) {
