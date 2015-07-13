@@ -9,6 +9,12 @@ var Q = require('q');
 
 var domain = process.env.CLOUDAPPX_SERVER || 'https://90f18825.ngrok.io';
 
+function debugmsg(msg) {
+  if (!process.env.SUPPRESS_LOG) {
+    console.log(msg);
+  }
+}
+
 function isValidFile (dir) {
   if (!fs.existsSync(dir) || !fs.lstatSync(dir).isFile() || path.extname(dir) !== '.zip') {
     return false;
@@ -49,8 +55,8 @@ function zip(dir) {
     var output = fs.createWriteStream(outfile);
     var archive = archiver('zip');
     output.on('close', function() {
-      console.log(archive.pointer() + ' total byes');
-      console.log('archiver has been finalized and the output file descriptor has closed.');
+      debugmsg(archive.pointer() + ' total byes');
+      debugmsg('archiver has been finalized and the output file descriptor has closed.');
       deferred.resolve(outfile);
     });
     archive.on('error', function(err) {
@@ -62,10 +68,10 @@ function zip(dir) {
     archive.finalize();
 
   } else if (isValidFile(dir)) {
-    console.log(dir);
+    debugmsg(dir);
     deferred.resolve(dir);
   } else {
-    console.log('invalid input');
+    debugmsg('invalid input');
     deferred.reject();
   }
   return deferred.promise;
@@ -73,12 +79,12 @@ function zip(dir) {
 
 function uploadFile(file) {
   var deferred = Q.defer();
-  console.log('uploading file');
+  debugmsg('uploading file');
   var req = request.post(domain + '/v1/upload', function (err, resp, body) {
     if (err) {
-      console.log('Error!');
+      debugmsg('Error!');
     } else {
-      console.log('URL: ' + body);
+      debugmsg('URL: ' + body);
       deferred.resolve({url: body, file: file});
     }
   });
