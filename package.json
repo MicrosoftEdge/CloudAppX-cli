@@ -25,6 +25,7 @@
   "dependencies": {
     "archiver": "^0.14.4",
     "commander": "^2.8.1",
+    "q": "^1.4.1",
     "request": "^2.58.0"
   }
 }

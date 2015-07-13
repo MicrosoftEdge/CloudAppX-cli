@@ -7,8 +7,8 @@ var request = require('request');
 var path = require('path');
 var Q = require('q');
 
-//var domain = 'https://8b57e1a5.ngrok.io';
-var domain = 'http://localhost:8080';
+var domain = 'https://90f18825.ngrok.io';
+//var domain = 'http://localhost:8080';
 
 function isValidFile (dir) {
   if (!fs.existsSync(dir) || !fs.lstatSync(dir).isFile() || path.extname(dir) !== '.zip') {
