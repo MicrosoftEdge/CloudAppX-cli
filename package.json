@@ -1,6 +1,6 @@
 {
   "name": "cloudappx",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Cloudy with a chance of AppX",
   "main": "cloudappx.js",
   "scripts": {
