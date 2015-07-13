@@ -7,8 +7,7 @@ var request = require('request');
 var path = require('path');
 var Q = require('q');
 
-var domain = 'https://90f18825.ngrok.io';
-//var domain = 'http://localhost:8080';
+var domain = process.env.CLOUDAPPX_SERVER || 'https://90f18825.ngrok.io';
 
 function isValidFile (dir) {
   if (!fs.existsSync(dir) || !fs.lstatSync(dir).isFile() || path.extname(dir) !== '.zip') {
