@@ -10,7 +10,7 @@ var Q = require('q');
 var domain = process.env.CLOUDAPPX_SERVER || 'https://90f18825.ngrok.io';
 
 function debugmsg(msg) {
-  if (!process.env.SUPPRESS_LOG) {
+  if (program && program.verbose) {
     console.log(msg);
   }
 }
@@ -115,6 +115,7 @@ if (!module.parent) {
   module.exports = {
     uploadFile: uploadFile,
     getResult: getResult,
-    cloudappx: cloudappx
+    cloudappx: cloudappx,
+    zip: zip
   };
 }
