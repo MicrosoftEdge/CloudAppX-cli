@@ -64,7 +64,7 @@ function zip(dir) {
       throw err;
     });
     archive.pipe(output);
-    archive.directory(dir);
+    archive.directory(dir, path.basename(dir));
     archive.finalize();
 
   } else if (isValidFile(dir)) {
